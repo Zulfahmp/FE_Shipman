@@ -1,0 +1,14 @@
+[
+    {"part_name":"1A","title_eng":"Tanker: checks pre-arrival"},
+    {"part_name":"1B","title_eng":"Tanker: checks pre-arrival if using an inert gas system"},
+    {"part_name":"2","title_eng":"Terminal: checks pre-arrival"},
+    {"part_name":"3","title_eng":"Tanker: checks after mooring"},
+    {"part_name":"4","title_eng":"Terminal: checks after mooring"},
+    {"part_name":"5A","title_eng":"Tanker and terminal: pre-transfer conference"},
+    {"part_name":"5B","title_eng":"Tanker and terminal: bulk liquid chemicals. Checks pre-transfer"},
+    {"part_name":"5C","title_eng":"Tanker and terminal: liquefied gas. Checks pre-transfer"},
+    {"part_name":"6","title_eng":"Tanker and terminal: agreements pre-transfer"},
+    {"part_name":"7A","title_eng":"General tanker: checks pre-transfer"},
+    {"part_name":"7B","title_eng":"Tanker: checks pre-transfer if crude oil washing is planned"},
+    {"part_name":"7C","title_eng":"Tanker: checks prior to tank cleaning and/or gas freeing"}
+]

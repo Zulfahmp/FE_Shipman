@@ -1,0 +1,22 @@
+/* @import './base.css'; */
+@import "tailwindcss";
+/* Preline UI */
+@source "preline/dist/*.js";
+@import "preline/variants.css";
+
+/* Plugins */
+/* @plugin "@tailwindcss/forms"; */
+*{
+  font-family: 'Nunito Sans',sans-serif;
+}
+
+/* Placeholder dan teks terpilih */
+.vs__selected,
+.vs__search::placeholder {
+  font-size: 0.7rem;
+}
+
+/* Dropdown list item */
+.vs__dropdown-menu li {
+  font-size: 0.7rem;
+}
