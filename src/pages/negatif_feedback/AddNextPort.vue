@@ -5,7 +5,7 @@
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>Port <span class="text-red-500">*</span></div>
-                    <vSelect v-model="NFSTATE.port_destination" :options="ports.data" label="port_name" :reduce="item => item.port_name" placeholder="--Select Port--" class="text-sm"/>
+                    <vSelect v-model="NFSTATE.port_next_id" :options="ports.data" label="port_name" :reduce="item => item.port_id" placeholder="--Select Port--" class="text-sm"/>
                 </div>
             </div>
             <div class="flex gap-5 mx-auto text-center justify-end my-4 px-4">
@@ -20,7 +20,7 @@
     import { Page } from '@/router';
     import { reactive } from 'vue';
     import { onMounted, ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter, onBeforeRouteLeave } from 'vue-router';
     import { GetData, PostData, PostDataMTP } from '@/api';
     import { NFSTORE } from './negativestore';
     import vSelect from 'vue-select'
@@ -43,7 +43,6 @@ async function loadPorts(){
 async function SubmitNF(){
     NFSTATE.sscl_id = NFSTATE.generateID('SSCL')
     NFSTATE.evidences = NFSTATE.detail.map(a=>a.evidence)
-    console.log(NFSTATE.evidences)
     let res = await PostData('/add-negative-feedback',NFSTATE.$state)
     const formData = new FormData();
     NFSTATE.evidences.forEach(a=>{
@@ -53,11 +52,12 @@ async function SubmitNF(){
 
     if(res.data.affected>0){
         Success('Negative Feedback Reported',()=>{
+            emit('saved')
             Page('negative-feedback',routing)
             emit('close')
         })
     }else{
-        Failed('SSCL Not Added',()=>{emit('close')})
+        Failed('Negative Feedbcak Not Added',()=>{emit('close')})
     }
 }
 </script>

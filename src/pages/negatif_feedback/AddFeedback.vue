@@ -5,11 +5,11 @@
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>Ship Name <span class="text-red-500">*</span></div>
-                     <vSelect v-model="NFSTATE.ship_name" :options="master.ship" label="ship_name" :reduce="item => item.ship_name" placeholder="--Select Ship--" class="text-sm"/>
+                     <vSelect v-model="NFSTATE.ship_id" :options="master.ship" label="ship_name" :reduce="item => item.ship_id" placeholder="--Select Ship--" class="text-sm"/>
                 </div>
                 <div class="flex gap-1 flex-col">
                     <div>Port Name <span class="text-red-500">*</span></div>
-                    <vSelect v-model="NFSTATE.port" :options="master.port" label="port_name" :reduce="item => item.port_name" placeholder="--Select Port--" class="text-sm"/>
+                    <vSelect v-model="NFSTATE.port_id" :options="master.port" label="port_name" :reduce="item => item.port_id" placeholder="--Select Port--" class="text-sm"/>
                 </div>
             </div>
             <div class="flex gap-5 mx-auto text-center justify-end my-4 px-4">
@@ -39,21 +39,20 @@
     const master = reactive({ship:[],port:[],berth:[],cargo:[]})
 
     watch([NFSTATE],()=>{
-        NEXT.value = (NFSTATE.ship_name != '' && NFSTATE.ship_name != null && NFSTATE.port!='' && NFSTATE.port!=null)
-        // console.log(NEXT.value,NFSTATE.ship_name,NFSTATE.port)
+        NEXT.value = (NFSTATE.ship_id != '' && NFSTATE.ship_id != null && NFSTATE.port_id!='' && NFSTATE.port_id!=null)
     })
 
     onMounted(async()=>{
         NFSTATE.resetNF()
         NFSTATE.created_by = AUTH.full_name 
-        let res = await GetData('/sscl_master');
+        let res = await GetData('/sscl-master');
         master.ship = res.data.ship
         master.port = res.data.port
     })
     
     function Continue(){
         NFSTATE.nf_id = NFSTATE.generateID()
-        Page('negative-feedback-input',routing)
+        Page('negative-feedback-add',routing)
     }
     function handleClose(){
         emit('close')

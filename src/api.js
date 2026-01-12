@@ -1,8 +1,8 @@
 import axios from "axios";
-async function GetData(url,search=''){
-    let searching = search !='' ? '?search='+search : ''
+async function GetData(url,params){
+    let queryParam= params && params !='' ? '?'+params : ''
     const token = localStorage.getItem('auth_token');
-    return await axios.get(import.meta.env.VITE_API+url+searching,{headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`}})
+    return await axios.get(import.meta.env.VITE_API+url+queryParam,{headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`}})
 }
 
 async function PostData(url,body){

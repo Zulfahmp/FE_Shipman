@@ -6,6 +6,7 @@
     const NEXT = ref(false)
     const SSCLSTATE= SSCLSTORE()
     const routing = useRouter()
+
     defineEmits(['close'])
 </script>
 
@@ -16,10 +17,10 @@
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>The Master MT/MV Name <span class="text-red-500">*</span></div>
-                    <input v-model="SSCLSTATE.mt_name" maxlength="100" type="text" class="p-2 bg-gray-100 rounded-sm" placeholder="Input MT/MV Name"/>
+                    <input v-model="SSCLSTATE.mt_name" maxlength="100" type="text" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input MT/MV Name"/>
                 </div>
                 <div class="flex gap-4">
-                    <input @click="NEXT=!NEXT" type="checkbox">
+                    <input @click="NEXT=!NEXT" type="checkbox" class="accent-blue-600">
                     <div class="flex flex-col">
                         <div>
                             You have accepted the terms and conditions that apply.
@@ -32,7 +33,7 @@
             </div>
             <div class="flex gap-5 mx-auto text-center justify-end my-4 px-4">
                 <div @click="$emit('close')" class="cursor-pointer rounded-lg font-bold py-2 px-4 bg-red-300 text-gray-800 text-xs">Cancel</div>
-                <button @click="Page('checklist-sscl',routing)" :disabled="!NEXT" :class="NEXT ? 'text-gray-800' : 'text-gray-400'" class="cursor-pointer rounded-lg py-2 px-4 bg-green-200 font-bold text-xs">Continue</button>
+                <button @click="Page('safety-checklist',routing)" :disabled="(!NEXT || SSCLSTATE.mt_name=='')" :class="(NEXT && SSCLSTATE.mt_name!='') ? 'text-gray-800' : 'text-gray-400'" class="cursor-pointer rounded-lg py-2 px-4 bg-green-200 font-bold text-xs">Continue</button>
             </div>
         </form>
     </div>

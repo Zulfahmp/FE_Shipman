@@ -1,0 +1,16 @@
+[
+    {"part_name":"1A","title_eng":"Tanker: checks pre-arrival","title_ind":"Kapal: pra-arrival checklist"},
+    {"part_name":"1B","title_eng":"Tanker: checks pre-arrival if using an inert gas system","title_ind":"Kapal: pra-arrival checklist jika menggunakan inert gas system"},
+    {"part_name":"2","title_eng":"Terminal: checks pre-arrival","title_ind":"Terminal: pra arrival  checklist"},
+    {"part_name":"3","title_eng":"Tanker: checks after mooring","title_ind":"Kapal: checklist setelah sandar"},
+    {"part_name":"4","title_eng":"Terminal: checks after mooring","title_ind":"Terminal: checklist setelah sandar"},
+    {"part_name":"5A","title_eng":"Tanker and terminal: pre-transfer conference","title_ind":"Kapal dan terminal: pre-transfer meeting"},
+    {"part_name":"5B","title_eng":"Tanker and terminal: bulk liquid chemicals. Checks pre-transfer","title_ind":"Tanker dan terminal: bahan kimia cair curah. Pra-transfer checklist"},
+    {"part_name":"5C","title_eng":"Tanker and terminal: liquefied gas. Checks pre-transfer","title_ind":"Tanker dan terminal: gas cair. Pra-transfer checklist"},
+    {"part_name":"6","title_eng":"Tanker and terminal: agreements pre-transfer","title_ind":"Tanker dan terminal: persetujuan pra-transfer"},
+    {"part_name":"7A","title_eng":"General tanker: checks pre-transfer","title_ind":"Tanker umum: pra-transfer checklist"},
+    {"part_name":"7B","title_eng":"Tanker: checks pre-transfer if crude oil washing is planned","title_ind":"Tanker: pra-transfer checklist jika COW direncanakan"},
+    {"part_name":"7C","title_eng":"Tanker: checks prior to tank cleaning and/or gas freeing","title_ind":"Tanker: checklist sebelum tank cleaning dan/atau gas free"},
+    {"part_name":"8","title_eng":"Tanker: repetitive checks during and after transfer","title_ind":""},
+    {"part_name":"9","title_eng":"Terminal: repetitive checks during and after transfer","title_ind":""}
+]

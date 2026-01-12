@@ -18,11 +18,11 @@
     </div>
     <div v-show="users.data.length" class="p-2">
         <div class="text-xs">({{ users.data.length }}) Users Found</div>
-        <div v-for="u in users.data"  class="even:bg-gray-100 odd:bg-white py-3 px-3 text-xs grid grid-cols-5 md:grid-cols-7 grid-rows-auto">
+        <div v-for="u in users.data"  class="even:bg-gray-100 odd:bg-white py-1.5 px-3 text-xs grid grid-cols-5 md:grid-cols-7 grid-rows-auto">
             <div class="col-span-2 p-2">
                 {{ u.full_name }}
             </div>
-            <div class="hidden md:block md:col-span-2 text-center p-">
+            <div class="hidden md:block md:col-span-2 text-center p-2">
                 {{ u.email }}
             </div>
             <div class="col-span-2 text-center p-2">

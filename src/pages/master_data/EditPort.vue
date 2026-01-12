@@ -68,7 +68,7 @@
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>Port Name <span class="text-red-500">*</span></div>
-                    <input v-model="port.port_name" id="port_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input port Name"/>
+                    <input v-model="port.port_name" id="port_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input port Name"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.port_name }}</div>
                 </div>
                 <div class="flex gap-1 flex-col">

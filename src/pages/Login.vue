@@ -4,9 +4,11 @@
   import { reactive,ref } from 'vue';
   import { AuthConfig } from '@/authconfig';
   const Auth = AuthConfig()
-  let email = ref('admin@gmail.com')
+  let email = ref('')
+//   let email = ref('admin@gmail.com')
   let logintext = reactive({text:'Login'})
-  let password = ref('abcd')
+  let password = ref('')
+//   let password = ref('abcd')
   let isInCorrect = ref(false)
   let errors = reactive({error_password:'',error_email:''})
   const routing = useRouter()
@@ -52,6 +54,7 @@ function AuthorizationChecking(e){
         return
     }
 
+    // fetch(import.meta.env.VITE_API+'/test').then(res=>console.log(res.json()))
     logintext.text = 'Logging in...'
     fetch(import.meta.env.VITE_API+'/authorization-checking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.value,password:password.value})}).then(res=>res.json()).then(res=>{
         setTimeout(()=>{
@@ -61,7 +64,7 @@ function AuthorizationChecking(e){
             if(res.authenticated){
                 Auth.setAuth(res)
                 localStorage.setItem('auth_token',res.token)
-                Page('dashboard',routing)
+                Page('sscl',routing)
             }else{
                 isInCorrect.value = true
             }
@@ -85,7 +88,7 @@ function AuthorizationChecking(e){
             <form @submit.prevent="AuthorizationChecking" class="flex flex-col gap-3 px-4 py-2">
                 <div class="flex flex-col text-xs">
                     <label for="email">Email</label>
-                    <input type="text" v-model="email" id="email" class="border rounded-sm p-2" placeholder="Input Email">
+                    <input type="text" v-model="email" id="email" class="border rounded-sm p-2" placeholder="Email">
                     <div class="text-right text-red-600 text-xs">{{ errors.error_email }}</div>
                 </div>
                 <div class="flex flex-col text-xs">
@@ -93,10 +96,10 @@ function AuthorizationChecking(e){
                     <input type="password" v-model="password" id="password" class="border rounded-sm p-2" placeholder="Username">
                     <div class="text-right text-red-600 text-xs">{{ errors.error_password }}</div>
                 </div>
-                <div class="flex gap-2 items-center">
+                <!-- <div class="flex gap-2 items-center">
                     <input type="checkbox">
                     <div class="text-xs">Remember Me</div>
-                </div>
+                </div> -->
                 <button type="submit" class="p-2 cursor-pointer bg-blue-600 text-white font-bold rounded-sm w-full p-2">
                     <div class="pointer-events-none">{{ logintext.text }}</div>
                 </button>

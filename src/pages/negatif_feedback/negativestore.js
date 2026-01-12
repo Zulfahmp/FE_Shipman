@@ -2,9 +2,10 @@ import { defineStore } from "pinia";
 const defaults  = ()=> ({
         created_by:'',
         nf_id:0,
-        ship_name:'',
-        port:'',
-        port_destination:'',
+        ship_id:'',
+        port_id:'',
+        port_next_id:'',
+        status_nf:-1,
         detail:[],
         evidences:[]
 });

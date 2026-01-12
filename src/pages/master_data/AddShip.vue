@@ -57,7 +57,7 @@ import { Failed, Success } from '@/sweet';
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>Ship Name <span class="text-red-500">*</span></div>
-                    <input v-model="ship.ship_name" id="ship_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input Ship Name"/>
+                    <input v-model="ship.ship_name" id="ship_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input Ship Name"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.ship_name }}</div>
                 </div>
                 <div class="flex gap-1 flex-col">

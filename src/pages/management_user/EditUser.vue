@@ -72,12 +72,12 @@
                 </div>
                 <div class="flex gap-1 flex-col">
                     <div>Employee Name <span class="text-red-500">*</span></div>
-                    <input v-model="user.full_name" id="full_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input Employee Name"/>
+                    <input v-model="user.full_name" id="full_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input Employee Name"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.full_name }}</div>
                 </div>
                 <div class="flex gap-1 flex-col">
                     <div>Employee Email<span class="text-red-500">*</span></div>
-                    <input v-model="user.email" id="email" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input Employee Email"/>
+                    <input v-model="user.email" id="email" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm lowercase" placeholder="Input Employee Email"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.email }}</div>
                 </div>
             </div>

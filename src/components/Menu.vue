@@ -20,13 +20,13 @@
     }
 </script>
 <template>
-    <div class="bg-gray-200 h-[40px] flex gap-5 p-2">
+    <div class="bg-white h-[40px] flex gap-5 p-2">
             <div class="rounded-sm p-0.5" @click="SideMenu">
                 <FontAwesomeIcon :icon="faBars" size="1x" class="text-gray-800 pointer-events-none"  @click="SideMenu"/>
             </div>
         <img src="/logo.svg" class="h-6" alt="" srcset="">
     </div>
-    <div id="side-menu" :class="{'block':MENUSIDE, 'hidden':!MENUSIDE}" class="fixed flex items-center top-0 w-full z-10" style="background-color: rgba(0,0,0,0.5);">
+    <div id="side-menu" :class="{'block':MENUSIDE, 'hidden':!MENUSIDE}" class="fixed flex items-center top-0 w-full z-10">
         <div class="w-[80%] h-screen z-10 bg-white">
             <div class="h-28 flex items-center gap-5 pl-5">
                 <img src="../assets/logo.svg" class="h-20 w-20 rounded-full bg-gray-100" alt="" srcset="">

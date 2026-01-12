@@ -67,7 +67,7 @@
             <div class="grid grid-rows-auto text-xs p-4 gap-3">
                 <div class="flex gap-1 flex-col">
                     <div>Cargo Name <span class="text-red-500">*</span></div>
-                    <input v-model="cargo.cargo_name" id="cargo_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input cargo Name"/>
+                    <input v-model="cargo.cargo_name" id="cargo_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input cargo Name"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.cargo_name }}</div>
                 </div>
                 <div class="flex gap-1 flex-col">

@@ -28,7 +28,7 @@
                     <vSelect v-model="N.ref_number" :options="REFNUMBER.data" label="ref_number" :reduce="item => item.ref_number" placeholder="--Select Ref Number--" class="text-sm"/>
                 </td>
                 <td class="border border-gray-200 p-2">
-                    <textarea rows="1" v-model="N.remarks" class="bg-gray-200 px-2 py-1 w-full rounded-sm" placeholder="Input Remarks"></textarea>
+                    <textarea rows="2" v-model="N.remarks" class="bg-gray-200 px-2 py-1 w-full rounded-sm" placeholder="Input Remarks"></textarea>
                 </td>
                 <td class="border border-gray-200 p-2">
                     <div class="flex flex-col">
@@ -36,9 +36,9 @@
                             <img class="w-full object-cover block" :src="N.evidence_url" alt="" srcset="">
                         </div>
                         <div class="flex justify-center gap-3 p-2">
-                            <label for="nfoto" class="rounded bg-blue-500 h-6 w-6 cursor-pointer text-white p-1 flex items-center justify-center"><FontAwesomeIcon :icon="faCameraAlt" size="1x"/></label>
-                            <input @change="handleImage($event,i)" id="nfoto" type="file" accept="image/*" class="hidden"/>
-                            <label for="nfoto" class="rounded bg-green-500 h-6 w-6 cursor-pointer text-white p-1 flex items-center justify-center"><FontAwesomeIcon :icon="faUpload" size="1xl"/></label>
+                            <label :for="'nfoto'+i" class="rounded bg-blue-500 h-6 w-6 cursor-pointer text-white p-1 flex items-center justify-center"><FontAwesomeIcon :icon="faCameraAlt" size="1x"/></label>
+                            <input @change="handleImage($event,i)" :id="'nfoto'+i" type="file" accept="image/png, image/jpeg, image/jpg" class="hidden"/>
+                            <label :for="'nfoto'+i" class="rounded bg-green-500 h-6 w-6 cursor-pointer text-white p-1 flex items-center justify-center"><FontAwesomeIcon :icon="faUpload" size="1xl"/></label>
                         </div>
                     </div>
                 </td>
@@ -54,7 +54,7 @@
      <div class="flex gap-5 mx-auto text-center justify-end my-4 px-4">
         <div @click="checkForNext" class="cursor-pointer rounded-lg py-2 px-4 bg-green-200 text-gray-800 font-bold text-xs">Continue</div>
     </div>
-    <AddNextPort v-if="ADDPOP" @close="AddPop"></AddNextPort>
+    <AddNextPort v-if="ADDPOP" @close="AddPop" @saved="saved" ></AddNextPort>
 </template>
 
 <script setup>
@@ -62,7 +62,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Breadcumb from '@/components/Breadcumb.vue';
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
-import { useRouter } from 'vue-router';const routing = useRouter()
+import { useRouter,onBeforeRouteLeave } from 'vue-router';const routing = useRouter()
 import { onMounted, ref, watch } from 'vue';
 import { faCameraAlt, faPlus, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import AddNextPort from './AddNextPort.vue';
@@ -75,10 +75,17 @@ const ADDPOP = ref(false)
 const WARNING = ref(false)
 const REFNUMBER = reactive({data:[]})
 const NEGATIVES = reactive({data:[{id_nf:NFSTATE.nf_id,ref_number:'',remarks:'',evidence:null}]})
-
+let isSaved = ref(false)
 watch([NEGATIVES],()=>{
     NFSTATE.detail=NEGATIVES.data
-    // console.log(NFSTATE.detail)
+})
+
+onBeforeRouteLeave((to, from, next) => {
+    if(!isSaved.value){
+        confirm('You have unsaved changes. Are you sure you want to leave this page?') ? next() : next(false)
+    }else{
+        next()
+    }
 })
 
 onMounted( async()=>{
@@ -90,6 +97,10 @@ onMounted( async()=>{
 function AddPop(){
     let change =  !ADDPOP.value
     ADDPOP.value= change
+    NFSTORE.resetNF()
+}
+function saved(){
+    isSaved.value=true
 }
 
 function AddNegative(){

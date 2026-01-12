@@ -3,10 +3,10 @@
     import axios from 'axios';
     import Swal from 'sweetalert2';
     import { PostData } from '@/api';
-import { Failed, Success } from '@/sweet';
+    import { Failed, Success } from '@/sweet';
 
-    const errors = reactive({role: '',full_name:'',email:''})
-    const user = reactive({role:'',full_name:'',email:''})
+    const errors = reactive({role: '',full_name:'',email:'',password:''})
+    const user = reactive({role:'',full_name:'',email:'',password:''})
 
     function resetErrors(){Object.keys(errors).forEach(a=>{errors[a]=''})}
     function resetValue(){Object.keys(user).forEach(a=>{user[a]=''})}
@@ -23,7 +23,9 @@ import { Failed, Success } from '@/sweet';
 
     async function SubmitUser(){
         Object.keys(user).forEach(a=>{
-            errors[a] = checkerRequired(a,user[a])
+            if(a!='password'){
+                errors[a] = checkerRequired(a,user[a])
+            }
         })
         errors.email = errors.email=='' ? checkerEmail('email',user.email) : errors.email
         if(Object.keys(errors).some(a=>errors[a]!='')){
@@ -45,7 +47,7 @@ import { Failed, Success } from '@/sweet';
             <div class="bg-blue-500 rounded-t-lg text-white p-2 font-bold text-center">Add User</div>
             <div class="grid grid-rows-auto text-xs p-4 gap-1">
                 <div class="flex gap-1 flex-col">
-                    <div>User Role <span class="text-red-500">*</span></div>
+                    <div>Role <span class="text-red-500">*</span></div>
                     <select v-model="user.role" id="role" class="p-2 bg-gray-100 rounded-sm" placeholder="Input User Role">
                         <option value="" selected>-- Select --</option>
                         <option value="1">Admin</option>
@@ -56,13 +58,18 @@ import { Failed, Success } from '@/sweet';
                 </div>
                 <div class="flex gap-1 flex-col">
                     <div>Employee Name <span class="text-red-500">*</span></div>
-                    <input v-model="user.full_name" id="full_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input Employee Name"/>
+                    <input v-model="user.full_name" id="full_name" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm uppercase" placeholder="Input Employee Name"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.full_name }}</div>
                 </div>
                 <div class="flex gap-1 flex-col">
                     <div>Employee Email<span class="text-red-500">*</span></div>
-                    <input v-model="user.email" id="email" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Input Employee Email"/>
+                    <input v-model="user.email" id="email" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm lowercase" placeholder="Input Employee Email"/>
                     <div class="text-right text-red-600 text-xs">{{ errors.email }}</div>
+                </div>
+                <div class="flex gap-1 flex-col">
+                    <div>Password <span class=" italic">(opsional)</span></div>
+                    <input v-model="user.password" id="password" type="text" maxlength="100" class="p-2 bg-gray-100 rounded-sm" placeholder="Password Default : #Pertamina321"/>
+                    <div class="text-right text-red-600 text-xs">{{ errors.password }}</div>
                 </div>
             </div>
             <div class="flex gap-5 mx-auto text-center justify-end my-4 px-4">

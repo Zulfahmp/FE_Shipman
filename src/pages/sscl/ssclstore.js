@@ -4,14 +4,20 @@ const defaultSSCL  = ()=> ({
         officer_name:'',
         officer_position:'',
         officer_contact:'',
-        ship_name:'',
-        port_name:'',
-        berth_name:'',
-        cargo_name:'',
+        ship_id:'',
+        port_id:'',
+        berth_id:'',
+        cargo_id:'',
         date_arrival:'',
         time_arrival:'',
+        time_8:0,
+        time_9:0,
+        interval_8:0,
+        interval_9:0,
         sscl_checklist : [],
-        mt_name : ''
+        mt_name : '',
+        status_sscl : 0,
+        created_by : ''
 });
 export const SSCLSTORE = defineStore('sscl',{
     state: () => defaultSSCL(),

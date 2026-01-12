@@ -1,18 +1,33 @@
 <script setup>
     import { Page } from '@/router';
     import { ref } from 'vue';
-    import { useRouter } from 'vue-router';
+    import { useRouter,onBeforeRouteLeave } from 'vue-router';
     import AddMT from './AddMT.vue';
+    import { SSCLSTORE } from './ssclstore';
+    import { onBeforeMount } from 'vue';
+
+    onBeforeRouteLeave((to, from, next) => {
+        if(to.path!='/safety-checklist'){
+            confirm('You have unsaved changes. Are you sure you want to leave this page?') ? next() : next(false)
+        }else{
+            next()
+        }
+    })
+    let SSCL_STATE = SSCLSTORE()
     const routing = useRouter()
     var ADDPOP = ref(false)
     function AddPop(){
-    let change =  !ADDPOP.value
-    ADDPOP.value= change
+        let change =  !ADDPOP.value
+        ADDPOP.value= change
     }
+
+    onBeforeMount(()=>{
+        SSCL_STATE.sscl_id=='' && Page('sscl',routing)
+    })
 
 </script>
 <template>
-    <div class="h-14 bg-blue-500 p-2 flex justify-center items-center text-white text-xs">
+    <div class="h-14 bg-blue-500 p-2 font-bold flex justify-center items-center text-white text-xs">
         TERMS AND CONDITIONS
     </div>
     <div class="p-2 text-xs">
