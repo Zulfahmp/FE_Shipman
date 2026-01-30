@@ -2,50 +2,50 @@ name: Deploy Vue FE to AWS
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: "npm"
+          cache: npm
 
-      # 3. Install dependencies
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
 
-      # 4. Build Vue project
-      - name: Build project
+      - name: Build
         run: npm run build
 
-      # 5. Upload dist folder to server
-      - name: Upload dist to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "dist/*"
-          target: ${{ secrets.DEPLOY_PATH }}
-          strip_components: 1
-
-      # 6. Reload nginx
-      - name: Reload Nginx
+      - name: Prepare folder
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo systemctl reload nginx
+            mkdir -p /var/www/shipman-fe
+            chown -R ubuntu:ubuntu /var/www/shipman-fe
+
+      - name: Upload dist
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "dist/*"
+          target: "/var/www/shipman-fe"
+
+      - name: Reload nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: sudo systemctl reload nginx
