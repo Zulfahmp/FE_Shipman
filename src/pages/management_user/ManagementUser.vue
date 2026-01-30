@@ -7,7 +7,7 @@
         </div>
         <div class="rounded-full bg-gray-200 px-4 text-white text-xs flex items-center gap-2">
             <FontAwesomeIcon :icon="faSearch" class="text-gray-400"/>
-            <input @keyup="handleSearch" v-model="search" type="text" class="p-2 w-full bg-gray-200 text-gray-800 focus:outline-none" placeholder="Search"/>
+            <input v-model="search" type="text" class="p-2 w-full bg-gray-200 text-gray-800 focus:outline-none" placeholder="Search"/>
         </div>
     </div>
     <div v-show="users.data.length==0 && search==''">
@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { reactive , onMounted, watch} from 'vue';
+import { reactive , onMounted, watch, ref} from 'vue';
 
 import Breadcumb from '@/components/Breadcumb.vue';
 import AddUser from '@/pages/management_user/AddUser.vue';
@@ -57,7 +57,7 @@ function setPopup(name, status) {
 }
 
 var user = reactive({full_name:'',user_id:0})
-var search = reactive('')
+var search = ref('')
 var EDIT = reactive({user_id:0,full_name:'',role:0,email:''})
 let users = reactive({data:[]})
 
@@ -84,11 +84,11 @@ function DeletePop(name='',id){
 }
 
 async function loadUsers(){
-    let res = await GetData('/list-users',search)
+    let res = await GetData(`/list-users?search=${search.value}`)
     users.data = res.data
 }
 
-async function handleSearch(){
-    loadUsers()
-}
+watch([search],async()=>{
+    await loadUsers()
+})
 </script>
